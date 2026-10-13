@@ -174,8 +174,8 @@ extension SyntaxProtocol {
 }
 
 /// Helper class that walks a syntax tree looking for configured regions.
-private class ConfiguredRegionVisitor<Configuration: BuildConfiguration>: SyntaxVisitor {
-  let configuration: Configuration
+private class ConfiguredRegionVisitor: SyntaxVisitor {
+  let configuration: any BuildConfiguration
 
   /// The regions we've found so far.
   var regions: [(IfConfigClauseSyntax, IfConfigRegionState)] = []
@@ -195,7 +195,7 @@ private class ConfiguredRegionVisitor<Configuration: BuildConfiguration>: Syntax
   // itself is inactive.
   var activeClauses: [IfConfigDeclSyntax: IfConfigClauseSyntax] = [:]
 
-  init(configuration: Configuration) {
+  init(configuration: any BuildConfiguration) {
     self.configuration = configuration
     super.init(viewMode: .sourceAccurate)
   }
